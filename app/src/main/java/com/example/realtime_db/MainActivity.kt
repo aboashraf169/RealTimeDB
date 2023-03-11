@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     lateinit var progressDialog: ProgressDialog
 
-    val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
  binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val myRef = database.getReference()
         var count = 0
         val name = binding.addName.text.toString()
@@ -34,7 +34,7 @@ binding.btnAddUser.setOnClickListener {
     )
     myRef.child("person").child("$count").setValue(person)
     count++
-    Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show()
+    Toast.makeText(applicationContext,"Success",Toast.LENGTH_SHORT).show()
 }
 
 binding.getAddUser.setOnClickListener {
@@ -44,12 +44,12 @@ binding.getAddUser.setOnClickListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             val value = snapshot.getValue()
             binding.viewData.text = value.toString()
-            Toast.makeText(this,"Success",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Success",Toast.LENGTH_SHORT).show()
 
         }
 
         override fun onCancelled(error: DatabaseError) {
-            Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Error",Toast.LENGTH_SHORT).show()
 
         }
 
